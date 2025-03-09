@@ -4,10 +4,12 @@ import { MatTableModule } from '@angular/material/table';
 import { User } from '../../models/user.model';
 import { UserService } from '../../services/user.service';
 import { UserDetailDialogComponent } from '../user-detail-dialog/user-detail-dialog.component';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-user-list',
-  imports: [MatTableModule],
+  imports: [MatTableModule, MatIconModule, MatButtonModule],
   templateUrl: './user-list.component.html',
   styleUrl: './user-list.component.scss',
 })
@@ -16,7 +18,7 @@ export class UserListComponent implements OnInit {
 
   selectedUser: User | null = null;
 
-  displayedColumns: string[] = ['name', 'email', 'website'];
+  displayedColumns: string[] = ['name', 'email', 'website', 'actions'];
 
   readonly dialog = inject(MatDialog);
 
@@ -29,6 +31,14 @@ export class UserListComponent implements OnInit {
   selectUser(user: User): void {
     this.selectedUser = user;
     this.openDialog();
+  }
+
+  editUser(user: User): void {
+    console.log(user);
+  }
+
+  deleteUser(user: User): void {
+    console.log(user);
   }
 
   openDialog() {
