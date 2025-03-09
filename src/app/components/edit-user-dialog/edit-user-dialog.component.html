@@ -1,6 +1,7 @@
 <h2 mat-dialog-title class="title">
   {{ user.id ? "Alteração de Usuário" : "Novo Usuário" }}
 </h2>
+<mat-divider />
 <mat-dialog-content>
   <form [formGroup]="userForm" style="display: flex; flex-direction: column">
     <div style="display: flex; flex-direction: row; gap: 1rem">
@@ -53,5 +54,7 @@
 
 <mat-dialog-actions>
   <button mat-button mat-dialog-close>Cancelar</button>
-  <button mat-button cdkFocusInitial (click)="onSave()">Salvar</button>
+  <button class="success" mat-button cdkFocusInitial (click)="onSave()">
+    Salvar
+  </button>
 </mat-dialog-actions>

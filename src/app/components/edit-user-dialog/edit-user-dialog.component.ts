@@ -22,6 +22,7 @@ import {
 } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { User } from '../../models/user.model';
+import { MatDivider } from '@angular/material/divider';
 
 @Component({
   selector: 'app-edit-user-dialog',
@@ -37,6 +38,7 @@ import { User } from '../../models/user.model';
     MatFormFieldModule,
     MatInputModule,
     MatFormField,
+    MatDivider,
   ],
   templateUrl: './edit-user-dialog.component.html',
   styleUrl: './edit-user-dialog.component.scss',

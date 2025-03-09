@@ -33,13 +33,18 @@
         <th mat-header-cell *matHeaderCellDef>&nbsp;</th>
         <td mat-cell *matCellDef="let user">
           <button
-            mat-icon-button
+            class="warn"
+            mat-mini-fab
+            matTooltip="Editar"
             (click)="editUser(user); $event.stopPropagation()"
+            style="margin-right: 0.5rem"
           >
             <mat-icon>edit</mat-icon>
           </button>
           <button
-            mat-icon-button
+            class="danger"
+            mat-mini-fab
+            matTooltip="Excluir"
             (click)="confirmDelete(user); $event.stopPropagation()"
           >
             <mat-icon>delete</mat-icon>
@@ -51,6 +56,8 @@
       <tr
         (click)="showUserDetails(row)"
         mat-row
+        matTooltip="Exibir detalhes"
+        matTooltipShowDelay="2500"
         *matRowDef="let row; columns: displayedColumns"
       ></tr>
     </table>

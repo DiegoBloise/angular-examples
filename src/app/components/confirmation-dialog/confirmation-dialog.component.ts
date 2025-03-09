@@ -8,6 +8,7 @@ import {
   MatDialogRef,
   MatDialogTitle,
 } from '@angular/material/dialog';
+import { MatDivider } from '@angular/material/divider';
 import { MatIcon } from '@angular/material/icon';
 
 @Component({
@@ -19,6 +20,7 @@ import { MatIcon } from '@angular/material/icon';
     MatDialogClose,
     MatButtonModule,
     MatIcon,
+    MatDivider,
   ],
   templateUrl: './confirmation-dialog.component.html',
   styleUrl: './confirmation-dialog.component.scss',

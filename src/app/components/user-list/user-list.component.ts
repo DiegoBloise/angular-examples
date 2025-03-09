@@ -14,9 +14,16 @@ import {
   MatSnackBarHorizontalPosition,
   MatSnackBarVerticalPosition,
 } from '@angular/material/snack-bar';
+import { MatTooltipModule } from '@angular/material/tooltip';
 @Component({
   selector: 'app-user-list',
-  imports: [MatTableModule, MatIconModule, MatButtonModule, MatCardModule],
+  imports: [
+    MatTableModule,
+    MatIconModule,
+    MatButtonModule,
+    MatCardModule,
+    MatTooltipModule,
+  ],
   templateUrl: './user-list.component.html',
   styleUrl: './user-list.component.scss',
 })
