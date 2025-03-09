@@ -1,11 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { UserService } from '../../services/user.service';
-import { UserDetailComponent } from '../user-detail/user-detail.component';
+import { Component, inject, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { MatTableModule } from '@angular/material/table';
 import { User } from '../../models/user.model';
+import { UserService } from '../../services/user.service';
+import { UserDetailDialogComponent } from '../user-detail-dialog/user-detail-dialog.component';
 
 @Component({
   selector: 'app-user-list',
-  imports: [UserDetailComponent],
+  imports: [MatTableModule],
   templateUrl: './user-list.component.html',
   styleUrl: './user-list.component.scss',
 })
@@ -13,6 +15,10 @@ export class UserListComponent implements OnInit {
   users: User[] = [];
 
   selectedUser: User | null = null;
+
+  displayedColumns: string[] = ['name', 'email', 'website'];
+
+  readonly dialog = inject(MatDialog);
 
   constructor(private userService: UserService) {}
 
@@ -22,5 +28,12 @@ export class UserListComponent implements OnInit {
 
   selectUser(user: User): void {
     this.selectedUser = user;
+    this.openDialog();
+  }
+
+  openDialog() {
+    this.dialog.open(UserDetailDialogComponent, {
+      data: this.selectedUser,
+    });
   }
 }
