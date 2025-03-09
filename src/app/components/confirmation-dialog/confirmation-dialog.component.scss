@@ -1,0 +1,16 @@
+h2 {
+  text-align: center;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  align-items: center;
+}
+
+.icon {
+  width: 3rem;
+  height: 3rem;
+  font-size: 3rem;
+}

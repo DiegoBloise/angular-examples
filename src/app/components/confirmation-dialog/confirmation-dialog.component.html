@@ -1,0 +1,13 @@
+<h2 mat-dialog-title>Confirmação</h2>
+<mat-dialog-content>
+  <div class="container">
+    <mat-icon class="icon" fontIcon="warning"></mat-icon>
+    <p>
+      Tem certeza que deseja excluir <strong>{{ data }}</strong>
+    </p>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close>Não</button>
+  <button mat-button mat-dialog-close cdkFocusInitial>Sim</button>
+</mat-dialog-actions>
