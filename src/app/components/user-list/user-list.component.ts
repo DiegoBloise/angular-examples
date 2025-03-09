@@ -9,7 +9,11 @@ import { UserService } from '../../services/user.service';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 import { EditUserDialogComponent } from '../edit-user-dialog/edit-user-dialog.component';
 import { UserDetailDialogComponent } from '../user-detail-dialog/user-detail-dialog.component';
-
+import {
+  MatSnackBar,
+  MatSnackBarHorizontalPosition,
+  MatSnackBarVerticalPosition,
+} from '@angular/material/snack-bar';
 @Component({
   selector: 'app-user-list',
   imports: [MatTableModule, MatIconModule, MatButtonModule, MatCardModule],
@@ -17,9 +21,14 @@ import { UserDetailDialogComponent } from '../user-detail-dialog/user-detail-dia
   styleUrl: './user-list.component.scss',
 })
 export class UserListComponent implements OnInit {
+  private _snackBar = inject(MatSnackBar);
+
+  horizontalPosition: MatSnackBarHorizontalPosition = 'right';
+  verticalPosition: MatSnackBarVerticalPosition = 'top';
+
   users: User[] = [];
 
-  selectedUser: User | null = null;
+  selectedUser!: User;
 
   displayedColumns: string[] = ['name', 'email', 'website', 'actions'];
 
@@ -32,26 +41,89 @@ export class UserListComponent implements OnInit {
   }
 
   newUser() {
-    this.dialog.open(EditUserDialogComponent, {
-      data: this.selectedUser,
-    });
+    this.cleanSelectedUser();
+    this.editUser(this.selectedUser);
   }
 
-  selectUser(user: User): void {
+  showUserDetails(user: User): void {
     this.dialog.open(UserDetailDialogComponent, {
       data: user,
     });
   }
 
   editUser(user: User): void {
-    this.dialog.open(EditUserDialogComponent, {
-      data: user,
+    this.selectedUser = user;
+
+    this.dialog
+      .open(EditUserDialogComponent, {
+        data: user,
+      })
+      .afterClosed()
+      .subscribe((result) => {
+        if (result) {
+          this.saveUser(result);
+        }
+      });
+  }
+
+  confirmDelete(user: User): void {
+    this.dialog
+      .open(ConfirmationDialogComponent, {
+        data: user.name,
+      })
+      .afterClosed()
+      .subscribe((isConfirmed) => {
+        if (isConfirmed && user.id) {
+          this.deleteUser(user.id);
+        }
+      });
+  }
+
+  saveUser(user: User) {
+    user = { ...user, id: this.selectedUser?.id };
+
+    // const request$ = user.id
+    //   ? this.userService.updateUser(user)
+    //   : this.userService.createUser(user);
+
+    // request$.subscribe((responseUser) => {
+    if (!user.id) {
+      user.id = this.users.length + 1;
+      this.users = [...this.users, user];
+
+      this._snackBar.open('Usuário cadastrado com sucesso!', '', {
+        horizontalPosition: this.horizontalPosition,
+        verticalPosition: this.verticalPosition,
+      });
+    } else {
+      this.users = this.users.map((u) => (u.id === user.id ? user : u));
+
+      this._snackBar.open('Usuário atualizado com sucesso!', '', {
+        horizontalPosition: this.horizontalPosition,
+        verticalPosition: this.verticalPosition,
+      });
+    }
+    // });
+
+    this.cleanSelectedUser();
+  }
+
+  deleteUser(id: number) {
+    this.userService.deleteUser(id);
+    this.users = this.users.filter((u) => u.id != id);
+
+    this._snackBar.open('Usuário removido com sucesso!', '', {
+      horizontalPosition: this.horizontalPosition,
+      verticalPosition: this.verticalPosition,
     });
   }
 
-  deleteUser(user: User): void {
-    this.dialog.open(ConfirmationDialogComponent, {
-      data: user.name,
-    });
+  cleanSelectedUser() {
+    this.selectedUser = {
+      name: '',
+      email: '',
+      phone: '',
+      website: '',
+    };
   }
 }
