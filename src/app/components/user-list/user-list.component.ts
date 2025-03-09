@@ -91,17 +91,11 @@ export class UserListComponent implements OnInit {
       user.id = this.users.length + 1;
       this.users = [...this.users, user];
 
-      this._snackBar.open('Usuário cadastrado com sucesso!', '', {
-        horizontalPosition: this.horizontalPosition,
-        verticalPosition: this.verticalPosition,
-      });
+      this.openSnackBar('Usuário cadastrado com sucesso!');
     } else {
       this.users = this.users.map((u) => (u.id === user.id ? user : u));
 
-      this._snackBar.open('Usuário atualizado com sucesso!', '', {
-        horizontalPosition: this.horizontalPosition,
-        verticalPosition: this.verticalPosition,
-      });
+      this.openSnackBar('Usuário atualizado com sucesso!');
     }
     // });
 
@@ -112,10 +106,7 @@ export class UserListComponent implements OnInit {
     this.userService.deleteUser(id);
     this.users = this.users.filter((u) => u.id != id);
 
-    this._snackBar.open('Usuário removido com sucesso!', '', {
-      horizontalPosition: this.horizontalPosition,
-      verticalPosition: this.verticalPosition,
-    });
+    this.openSnackBar('Usuário removido com sucesso!');
   }
 
   cleanSelectedUser() {
@@ -125,5 +116,13 @@ export class UserListComponent implements OnInit {
       phone: '',
       website: '',
     };
+  }
+
+  openSnackBar(message: string) {
+    this._snackBar.open(message, '', {
+      horizontalPosition: this.horizontalPosition,
+      verticalPosition: this.verticalPosition,
+      duration: 3000,
+    });
   }
 }
