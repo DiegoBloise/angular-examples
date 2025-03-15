@@ -1,6 +1,11 @@
 <h2 mat-dialog-title>Detalhes do Usuário</h2>
 <mat-dialog-content>
-  <app-user-detail [user]="data" />
+  <div>
+    <p><strong>Nome:</strong> {{ user.name }}</p>
+    <p><strong>Email:</strong> {{ user.email }}</p>
+    <p><strong>Telefone:</strong> {{ user.phone }}</p>
+    <p><strong>Website:</strong> {{ user.website }}</p>
+  </div>
 </mat-dialog-content>
 <mat-dialog-actions>
   <button mat-button mat-dialog-close>Fechar</button>

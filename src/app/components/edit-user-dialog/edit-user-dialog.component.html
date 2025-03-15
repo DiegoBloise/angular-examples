@@ -3,58 +3,66 @@
 </h2>
 <mat-divider />
 <mat-dialog-content>
-  <form [formGroup]="userForm" style="display: flex; flex-direction: column">
-    <div style="display: flex; flex-direction: row; gap: 1rem">
-      <mat-form-field class="field">
-        <mat-label>Nome</mat-label>
-        <input matInput formControlName="name" />
-        @if (userForm.hasError('required')) {
-        <mat-error>Nome é <strong>obrigatório</strong></mat-error>
-        }
-      </mat-form-field>
+  <form
+    id="user-form"
+    [formGroup]="userForm"
+    (ngSubmit)="onSave()"
+    style="display: flex; flex-direction: column; margin: 1rem"
+  >
+    <mat-form-field class="mat-form-field">
+      <mat-label>Nome</mat-label>
+      <input matInput formControlName="name" required />
+      <mat-error>{{ errorMessage("name") }}</mat-error>
+    </mat-form-field>
 
-      <mat-form-field class="field">
-        <mat-label>Email</mat-label>
-        <input
-          type="email"
-          matInput
-          formControlName="email"
-          placeholder="Ex. pat@example.com"
-        />
-        @if (userForm.hasError('email') && !userForm.hasError('required')) {
-        <mat-error>Informe um email válido</mat-error>
-        } @if (userForm.hasError('required')) {
-        <mat-error>Email é <strong>obrigatório</strong></mat-error>
-        }
-      </mat-form-field>
-    </div>
+    <mat-form-field class="mat-form-field">
+      <mat-label>Email</mat-label>
+      <input
+        matInput
+        placeholder="example@mail.com"
+        formControlName="email"
+        required
+      />
 
-    <div style="display: flex; flex-direction: row; gap: 1rem">
-      <mat-form-field class="field">
-        <mat-label>Telefone</mat-label>
-        <span matTextPrefix>+1 &nbsp;</span>
-        <input
-          type="tel"
-          matInput
-          placeholder="555-555-1234"
-          formControlName="phone"
-        />
-        @if (userForm.hasError('phone') && !userForm.hasError('required')) {
-        <mat-error>Informe um telefone válido</mat-error>
-        }
-      </mat-form-field>
+      <mat-error>{{ errorMessage("email") }}</mat-error>
+    </mat-form-field>
 
-      <mat-form-field class="field">
-        <mat-label>Website</mat-label>
-        <input matInput formControlName="website" />
-      </mat-form-field>
-    </div>
+    <mat-form-field class="mat-form-field">
+      <mat-label>Telefone</mat-label>
+      <span matTextPrefix>+55 &nbsp;</span>
+      <input
+        matInput
+        maxlength="11"
+        minlength="11"
+        placeholder="11-91234-5678"
+        formControlName="phone"
+        required
+      />
+      <mat-error>{{ errorMessage("phone") }}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="mat-form-field">
+      <mat-label>Website</mat-label>
+      <span matTextPrefix>http:// &nbsp;</span>
+      <input
+        matInput
+        type="url"
+        placeholder="www.website.com"
+        formControlName="website"
+      />
+    </mat-form-field>
   </form>
 </mat-dialog-content>
 
 <mat-dialog-actions>
   <button mat-button mat-dialog-close>Cancelar</button>
-  <button class="success" mat-button cdkFocusInitial (click)="onSave()">
+  <button
+    class="success"
+    mat-button
+    cdkFocusInitial
+    type="submit"
+    form="user-form"
+  >
     Salvar
   </button>
 </mat-dialog-actions>
