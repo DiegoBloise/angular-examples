@@ -1,0 +1,12 @@
+@if (tasks.length > 0) {
+<ul class="my-3 gap-2 flex flex-col">
+  @for (task of tasks; track task.title;) {
+  <task-item [task]="task" />
+  }
+</ul>
+} @else {
+<div class="text-center my-5">
+  <h5 class="tex-red">{{ emptyMessage }}</h5>
+  <p>There are no tasks to display.</p>
+</div>
+}

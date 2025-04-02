@@ -1,0 +1,68 @@
+<app-dialog [(visible)]="show" dialogId="userEditDialog" [title]="dialogTitle">
+  <div dialog-content>
+    <form id="user-form" [formGroup]="userForm" (ngSubmit)="onSave()">
+      <fieldset class="fieldset">
+        <legend class="fieldset-legend">Name</legend>
+        <label class="input validator w-full">
+          <input
+            type="text"
+            placeholder="John Doe"
+            minlength="3"
+            required
+            formControlName="name"
+          />
+        </label>
+        <p class="validator-hint hidden mt-0">
+          Must be at least 3 characters long
+        </p>
+      </fieldset>
+      <fieldset class="fieldset">
+        <legend class="fieldset-legend">Email</legend>
+        <label class="input validator w-full">
+          <input
+            type="email"
+            placeholder="example@email.com"
+            required
+            formControlName="email"
+          />
+        </label>
+        <p class="validator-hint hidden mt-0">Enter valid email address</p>
+      </fieldset>
+
+      <fieldset class="fieldset">
+        <legend class="fieldset-legend">Phone</legend>
+        <label class="input validator w-full">
+          <input
+            type="tel"
+            class="tabular-nums"
+            placeholder="(123) 456-7890"
+            pattern="[0-9]*"
+            minlength="10"
+            maxlength="10"
+            required
+            formControlName="phone"
+          />
+        </label>
+        <p class="validator-hint hidden mt-0">Must be 10 digits</p>
+      </fieldset>
+
+      <fieldset class="fieldset">
+        <legend class="fieldset-legend">Website</legend>
+        <label class="input validator w-full">
+          <input
+            type="url"
+            placeholder="https://www.example.com"
+            value="https://"
+            pattern="^(https?://)?([a-zA-Z0-9]([a-zA-Z0-9\-].*[a-zA-Z0-9])?\.)+[a-zA-Z].*$"
+            formControlName="website"
+          />
+        </label>
+        <p class="validator-hint hidden mt-0">Must be valid URL</p>
+      </fieldset>
+    </form>
+  </div>
+  <div dialog-actions>
+    <button class="btn btn-ghost mr-2" (click)="closeDialog()">Cancel</button>
+    <button class="btn btn-success" type="submit" form="user-form">Save</button>
+  </div>
+</app-dialog>

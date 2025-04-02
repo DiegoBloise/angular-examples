@@ -1,0 +1,14 @@
+<form class="flex gap-2">
+  <input
+    class="input flex-1"
+    name="new-task"
+    type="text"
+    maxlength="32"
+    minlength="3"
+    placeholder="Enter a new task"
+    [(ngModel)]="newTitle"
+  />
+  <button class="btn btn-primary" type="submit" (click)="addNewTask()">
+    Add task
+  </button>
+</form>

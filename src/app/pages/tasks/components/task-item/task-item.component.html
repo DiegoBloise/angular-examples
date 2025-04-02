@@ -1,0 +1,16 @@
+<li class="select-none flex flex-row items-center justify-between">
+  <label>
+    <div class="flex flex-row gap-2">
+      <input
+        class="checkbox checkbox-primary"
+        type="checkbox"
+        [checked]="task.isComplete"
+        (click)="toggleIsComplete()"
+      />
+      <h3 [class]="{ 'line-through': task.isComplete }">
+        {{ task.title }}
+      </h3>
+    </div>
+  </label>
+  <button class="btn btn-soft btn-error" (click)="removeTask()">Remove</button>
+</li>

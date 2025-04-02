@@ -1,1 +1,14 @@
-<router-outlet />
+<app-menu />
+<main class="flex-1 h-full max-[900px] sm:mx-auto px-10">
+  <header class="mb-4 mt-5">
+    <h1 class="text-3xl">{{ pageTitle }}</h1>
+  </header>
+  <router-outlet />
+</main>
+<footer
+  class="mt-10 footer sm:footer-horizontal footer-center bg-base-300 text-base-content p-4"
+>
+  <aside>
+    <p>© {{ date }} Diego Bloise. All rights reserved.</p>
+  </aside>
+</footer>

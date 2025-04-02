@@ -1,0 +1,33 @@
+<app-dialog
+  [(visible)]="visible"
+  closeOnEscape
+  dialogId="userDetailsDialog"
+  title="User details"
+>
+  <div dialog-content>
+    <div class="grid grid-cols-3 gap-2">
+      <p [class]="fieldsClass.label">Name</p>
+      <p [class]="fieldsClass.value">{{ user()?.name }}</p>
+
+      <p [class]="fieldsClass.label">Email</p>
+      <p [class]="fieldsClass.value">{{ user()?.email }}</p>
+
+      <p [class]="fieldsClass.label">Phone</p>
+      <p [class]="fieldsClass.value">{{ user()?.phone }}</p>
+
+      <p [class]="fieldsClass.label">Website</p>
+      <p [class]="fieldsClass.value">
+        <a
+          class="link link-primary hover:underline"
+          [href]="'https://' + user()?.website"
+          target="_blank"
+          >{{ user()?.website }}</a
+        >
+      </p>
+    </div>
+  </div>
+
+  <div dialog-actions>
+    <button class="btn btn-soft" (click)="closeDialog()">Close</button>
+  </div>
+</app-dialog>

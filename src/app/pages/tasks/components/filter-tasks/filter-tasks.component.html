@@ -1,0 +1,8 @@
+<label class="select w-full">
+  <span class="label">Status</span>
+  <select [(ngModel)]="selectedFilter" (ngModelChange)="updateFilter($event)">
+    <option value="0">All</option>
+    <option value="1">In progress</option>
+    <option value="2">Completed</option>
+  </select>
+</label>
